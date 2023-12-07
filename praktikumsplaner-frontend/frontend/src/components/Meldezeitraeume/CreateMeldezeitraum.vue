@@ -41,7 +41,7 @@
         <v-btn
             class="float-md-right"
             color="primary"
-            variant="text"
+            variant="flat"
             @click="clickSpeichern()"
         >
             Speichern
