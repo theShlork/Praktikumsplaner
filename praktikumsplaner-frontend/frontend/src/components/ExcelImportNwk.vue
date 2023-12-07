@@ -2,13 +2,13 @@
     <div>
         <v-dialog
             v-model="visible"
-            persistent
+            :persistent="true"
             max-width="550"
         >
-            <template #activator="{ on }">
+            <template #activator="{ props }">
                 <v-btn
                     color="primary"
-                    v-on="on"
+                    v-bind="props"
                 >
                     <v-icon>mdi-tray-arrow-up</v-icon>
                     Datei Hochladen
@@ -35,7 +35,7 @@
                         <v-spacer />
                         <v-btn
                             color="primary"
-                            outlined
+                            variant="outlined"
                             @click="cancel()"
                         >
                             Abbrechen
@@ -50,24 +50,26 @@
                 </v-card>
             </v-form>
         </v-dialog>
-        <Error-dialog
+        <error-dialog
             :dialogtext="errorDialogText"
             :dialogtitle="errorDialogTitle"
             :model-value="errorDialog"
             iconcolor="red"
             icontext="mdi mdi-alert-octagon-outline"
             @close="errorDialog = false"
-        ></Error-dialog>
+        ></error-dialog>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useSnackbarStore } from "@/stores/snackbar";
+
 import { Levels } from "@/api/error";
 import NwkService from "@/api/NwkService";
-import { useRules } from "@/composables/rules";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ErrorDialog from "@/components/common/ErrorDialog.vue";
+import { useRules } from "@/composables/rules";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 const visible = ref<boolean>();
 const excelDatei = ref<File>();
@@ -118,5 +120,4 @@ function showError() {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

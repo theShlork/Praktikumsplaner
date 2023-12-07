@@ -15,17 +15,17 @@
                 Wollen Sie eine Stelle für einen Auszubildenden melden
             </p>
             <v-checkbox
-                :input-value="isCheckedAusbildung"
+                :model-value="isCheckedAusbildung"
                 class="checkbox-spacing"
-                @change="isCheckedAusbildung = !isCheckedAusbildung"
+                @update:model-value="isCheckedAusbildung = !isCheckedAusbildung"
             >
                 <template #label>
                     <span class="v-label-black">ja</span>
                 </template>
             </v-checkbox>
             <v-checkbox
-                :input-value="isCheckedStudium"
-                @change="isCheckedStudium = !isCheckedStudium"
+                :model-value="isCheckedStudium"
+                @update:model-value="isCheckedStudium = !isCheckedStudium"
             >
                 <template #label>
                     <span class="v-label-black">nein</span>
@@ -36,7 +36,7 @@
             <v-col>
                 <v-btn
                     color="primary"
-                    outlined
+                    variant="outlined"
                     :to="{ path: '/' }"
                 >
                     ZURÜCK
@@ -57,9 +57,10 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+
+import MeldezeitraumService from "@/api/MeldezeitraumService";
 import router from "@/router";
 import { useHeaderStore } from "@/stores/header";
-import MeldezeitraumService from "@/api/MeldezeitraumService";
 
 const isCheckedAusbildung = ref<boolean>(false);
 const isCheckedStudium = ref<boolean>(false);

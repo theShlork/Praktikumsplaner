@@ -11,7 +11,7 @@
             <v-col>
                 <v-btn
                     color="primary"
-                    outlined
+                    variant="outlined"
                     :to="{ path: '/meldungAusbilder' }"
                 >
                     ZURÜCK
