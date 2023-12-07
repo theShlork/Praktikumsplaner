@@ -6,7 +6,7 @@
     >
         <v-card>
             <v-card-title>
-                {{ props.dialogtitle }}
+                {{ dialogtitle }}
             </v-card-title>
             <v-card-text>
                 <v-row>
@@ -14,11 +14,11 @@
                         <v-icon
                             size="x-large"
                             :color="iconcolor"
-                            >{{ props.icontext }}</v-icon
+                            >{{ icontext }}</v-icon
                         >
                     </v-col>
                     <v-col cols="11">
-                        {{ props.dialogtext }}
+                        {{ dialogtext }}
                     </v-col>
                 </v-row>
             </v-card-text>

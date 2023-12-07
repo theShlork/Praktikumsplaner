@@ -6,10 +6,10 @@
     >
         <v-card>
             <v-card-title>
-                {{ props.dialogtitle }}
+                {{ dialogtitle }}
             </v-card-title>
             <v-card-text
-                v-for="(text, index) in props.dialogtext.split('\n')"
+                v-for="(text, index) in dialogtext.split('\n')"
                 :key="index"
             >
                 {{ text }}

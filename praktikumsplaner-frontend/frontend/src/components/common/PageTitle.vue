@@ -2,11 +2,11 @@
     <v-row class="PageHeader">
         <v-btn
             :to="{ path: backButtonUrl }"
-            icon
+            variant="plain"
         >
             <v-icon color="black">mdi-arrow-left</v-icon>
         </v-btn>
-        <span class="text-h5">{{ props.pageHeaderText }}</span>
+        <span class="text-h5">{{ pageHeaderText }}</span>
     </v-row>
 </template>
 
