@@ -8,7 +8,7 @@ export interface UserState {
 
 export const useUserStore = defineStore("user", () => {
     const username = ref<string | undefined>(undefined);
-    const roles = ref<string[]>();
+    const roles = ref<string[]>([]);
 
     const getUsername = computed((): string | undefined => {
         return username.value;
