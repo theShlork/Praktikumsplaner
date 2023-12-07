@@ -1,6 +1,5 @@
 <template>
     <v-dialog
-        :key="props.value"
         v-model="visible"
         persistent
         width="800"
@@ -19,7 +18,7 @@
                 <v-spacer />
                 <v-btn
                     id="yesnodialog-btn-no"
-                    text
+                    variant="text"
                     @click="no"
                 >
                     Nein
@@ -37,24 +36,25 @@
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
+
 const props = defineProps<{
     dialogtitle: string;
     dialogtext: string;
     /**
      * Steuerflag für den Dialog
      */
-    value: boolean;
+    modelValue: boolean;
 }>();
 
 const emits = defineEmits<{
     (e: "no"): void;
     (e: "yes"): void;
-    (e: "input", v: boolean): void;
+    (e: "update:modelValue", v: boolean): void;
 }>();
 
 const visible = computed({
-    get: () => props.value,
-    set: (v) => emits("input", v),
+    get: () => props.modelValue,
+    set: (v) => emits("update:modelValue", v),
 });
 
 function no(): void {
@@ -65,6 +65,4 @@ function yes(): void {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

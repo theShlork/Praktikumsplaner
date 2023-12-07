@@ -14,7 +14,7 @@
                             v-model="meldezeitraum.zeitraumName"
                             label="Zeitraumname"
                             :rules="zeitraumNameRules"
-                            outlined
+                            variant="outlined"
                         ></v-text-field>
                     </v-col>
                 </v-row>
@@ -23,14 +23,15 @@
                         sm="8"
                         md="4"
                     >
-                        <ZeitraumPicker :value="meldezeitraum"></ZeitraumPicker>
+                        <zeitraum-picker
+                            :value="meldezeitraum"
+                        ></zeitraum-picker>
                     </v-col>
                 </v-row>
             </v-container>
         </v-form>
         <v-btn
-            outlined
-            text
+            variant="outlined"
             color="primary"
             class="float-md-left"
             @click="clickAbbrechen()"
@@ -50,12 +51,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import Meldezeitraum from "@/types/Meldezeitraum";
+
 import MeldezeitraumService from "@/api/MeldezeitraumService";
 import ZeitraumPicker from "@/components/Meldezeitraeume/ZeitraumPicker.vue";
-import { sleep } from "@antfu/utils";
-import router from "@/router";
 import { useRules } from "@/composables/rules";
+import router from "@/router";
+import Meldezeitraum from "@/types/Meldezeitraum";
 
 const meldezeitraum = ref<Meldezeitraum>(new Meldezeitraum(""));
 const form = ref<HTMLFormElement>();
@@ -87,9 +88,7 @@ function clickSpeichern() {
             })
             .finally(() => {
                 resetForm();
-                sleep(1000).then(() => {
-                    router.push("/");
-                });
+                router.push("/");
             });
     }
 }

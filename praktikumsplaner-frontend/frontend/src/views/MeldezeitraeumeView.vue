@@ -1,15 +1,14 @@
 <template>
     <v-container class="finishedBackground">
-        <PageTitle
+        <page-title
             back-button-url="/"
             page-header-text="Meldezeitraum"
-        ></PageTitle>
-        <CreateMeldezeitraum></CreateMeldezeitraum>
+        ></page-title>
+        <create-meldezeitraum></create-meldezeitraum>
     </v-container>
 </template>
 
 <script setup lang="ts">
-import CreateMeldezeitraum from "@/components/Meldezeitraeume/CreateMeldezeitraum.vue";
 import PageTitle from "@/components/common/PageTitle.vue";
+import CreateMeldezeitraum from "@/components/Meldezeitraeume/CreateMeldezeitraum.vue";
 </script>
-

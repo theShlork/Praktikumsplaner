@@ -12,10 +12,11 @@
 </template>
 
 <script setup lang="ts">
-import HealthService from "@/api/HealthService";
-import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted } from "vue";
+
+import HealthService from "@/api/HealthService";
 import { useHeaderStore } from "@/stores/header";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
 const headerStore = useHeaderStore();
@@ -28,5 +29,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -1,5 +1,7 @@
-import { Levels } from "@/api/error";
 import { defineStore } from "pinia";
+import { ref } from "vue";
+
+import { Levels } from "@/api/error";
 
 export interface SnackbarState {
     message: string | undefined;
@@ -7,25 +9,21 @@ export interface SnackbarState {
     show: boolean;
 }
 
-export const useSnackbarStore = defineStore("snackbar", {
-    state: (): SnackbarState => ({
-        message: undefined,
-        level: Levels.INFO,
-        show: false,
-    }),
-    getters: {},
-    actions: {
-        showMessage(message: {
-            message?: string;
-            level?: Levels;
-            show?: boolean;
-        }): void {
-            this.message = message.message;
-            this.level = message.level ? message.level : Levels.INFO;
-            this.show = true;
-        },
-        updateShow(show: boolean): void {
-            this.show = show;
-        },
-    },
+export const useSnackbarStore = defineStore("snackbar", () => {
+    const message = ref<string | undefined>(undefined);
+    const level = ref(Levels.INFO);
+    const show = ref(false);
+    function showMessage(messageI: {
+        message?: string;
+        level?: Levels;
+        show?: boolean;
+    }): void {
+        message.value = messageI.message;
+        level.value = messageI.level ? messageI.level : Levels.INFO;
+        show.value = true;
+    }
+    function updateShow(showI: boolean): void {
+        show.value = showI;
+    }
+    return { message, level, show, showMessage, updateShow };
 });

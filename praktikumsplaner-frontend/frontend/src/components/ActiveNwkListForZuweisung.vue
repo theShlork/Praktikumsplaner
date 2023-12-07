@@ -10,32 +10,32 @@
                 elevation="0"
                 color="grey"
             >
-                <v-list-item-content>
-                    <v-list-item-title style="cursor: grab">
-                        {{ nwk.vorname }} {{ nwk.nachname }} ({{
-                            nwk.studiengang
-                        }}
-                        / {{ nwk.jahrgang }})
-                    </v-list-item-title>
-                </v-list-item-content>
+                <v-list-item-title style="cursor: grab">
+                    {{ nwk.vorname }} {{ nwk.nachname }} ({{
+                        nwk.studiengang
+                    }}
+                    / {{ nwk.jahrgang }})
+                </v-list-item-title>
             </v-card>
         </v-list-item>
     </v-list>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import Nwk from "@/types/Nwk";
+import { onMounted, ref } from "vue";
+
 import NwkService from "@/api/NwkService";
 import { useNwkStore } from "@/stores/nwkStore";
-import { EventBus } from "@/stores/event-bus";
+import Nwk from "@/types/Nwk";
 
 const nwks = ref<Nwk[]>([]);
 const nwkStore = useNwkStore();
 
 onMounted(() => {
     getAllActiveNwks();
-    EventBus.$on("assignedNwk", removeNwkFromList);
-    EventBus.$on("unassignedNwk", addNwkToList);
+    if (this != undefined) {
+        this!.emitter.$on("assignedNwk", removeNwkFromList);
+        this!.emitter.$on("unassignedNwk", addNwkToList);
+    }
 });
 function getAllActiveNwks() {
     NwkService.getAllUnassignedNwks().then((fetchedNwks) => {

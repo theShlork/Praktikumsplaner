@@ -1,17 +1,17 @@
 <template>
     <div>
         <div class="text-overline">
-            {{ props.label }}
+            {{ label }}
         </div>
         <v-input
-            :readonly="props.readonly"
-            :hide-details="props.hideDetails"
+            :readonly="readonly"
+            :hide-details="hideDetails"
             :rules="validierungsRegeln"
-            :dense="props.dense"
-            :error.sync="error"
+            :density="dense ? 'compact' : 'default'"
+            :error="error"
             :error-messages="errorMessages"
-            :persistent-hint="props.persistentHint"
-            :hint="props.hint"
+            :persistent-hint="persistentHint"
+            :hint="hint"
         >
             <v-row>
                 <v-col cols="6">
@@ -20,12 +20,12 @@
                         v-model="day"
                         required
                         label="Datum"
-                        :readonly="props.readonly"
+                        :readonly="readonly"
                         :error="error"
                         hide-details
-                        :dense="props.dense"
-                        :filled="props.filled"
-                        :outlined="props.outlined"
+                        :density="dense ? 'compact' : 'default'"
+                        :filled="filled"
+                        :outlined="outlined"
                         type="date"
                         @focusout="leaveInput"
                         @focus="enterInput"
@@ -38,27 +38,27 @@
                         v-model="time"
                         required
                         label="Zeit"
-                        :readonly="props.readonly"
+                        :readonly="readonly"
                         :error="error"
                         hide-details
-                        :dense="props.dense"
-                        :filled="props.filled"
-                        :outlined="props.outlined"
+                        :density="dense ? 'compact' : 'default'"
+                        :filled="filled"
+                        :outlined="outlined"
                         type="time"
                         @focusout="leaveInput"
                         @focus="enterInput"
                         @blur="sendInput"
                     >
                         <template
-                            v-if="props.clearable && !props.readonly"
-                            #append-outer
+                            v-if="clearable && !readonly"
+                            #append-inner
                         >
                             <v-btn
                                 icon
-                                :disabled="!value"
+                                :disabled="!modelValue"
                                 @click="clear"
                             >
-                                <v-icon v-if="value"> mdi-close</v-icon>
+                                <v-icon v-if="modelValue"> mdi-close </v-icon>
                             </v-btn>
                         </template>
                     </v-text-field>
@@ -87,7 +87,7 @@ import { computed, onMounted, ref, watch } from "vue";
  */
 
 interface Props {
-    value: string;
+    modelValue: string;
     readonly: boolean;
     hideDetails: boolean;
     dense: boolean;
@@ -121,7 +121,7 @@ const dateFilled = (): string | boolean =>
     checkBothFieldsFilled() || "Datum und Zeit muss ausgefüllt werden";
 
 const emits = defineEmits<{
-    (e: "input", v: string | null): void;
+    (e: "update:modelValue", v: string | null): void;
 }>();
 
 const validierungsRegeln = computed(() => {
@@ -140,7 +140,7 @@ function clear(): void {
     errorMessages.value = "";
     time.value = null;
     day.value = null;
-    emits("input", getDate());
+    emits("update:modelValue", getDate());
 }
 
 function getDate(): string | null {
@@ -154,8 +154,8 @@ function getDate(): string | null {
 }
 
 function parseValue(): void {
-    if (props.value) {
-        const newDate = new Date(props.value);
+    if (props.modelValue) {
+        const newDate = new Date(props.modelValue);
         day.value = parseDay(newDate);
         time.value = parseTime(newDate);
     } else {
@@ -165,7 +165,7 @@ function parseValue(): void {
 }
 
 watch(
-    () => props.value,
+    () => props.modelValue,
     () => parseValue()
 );
 
@@ -196,7 +196,7 @@ function enterInput(): void {
 
 function sendInput(): void {
     if (checkBothFieldsFilled()) {
-        emits("input", getDate());
+        emits("update:modelValue", getDate());
     }
 }
 

@@ -12,7 +12,7 @@
             <v-col>
                 <v-btn
                     disabled
-                    class="primary"
+                    color="primary"
                 >
                     <v-icon>mdi-plus</v-icon>
                     Hinzufügen
@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import ExcelImportNwk from "@/components/ExcelImportNwk.vue";
-import PageTitle from "@/components/common/PageTitle.vue";
 import ActiveNwkList from "@/components/ActiveNwkList.vue";
+import PageTitle from "@/components/common/PageTitle.vue";
+import ExcelImportNwk from "@/components/ExcelImportNwk.vue";
 </script>
 
 <style scoped>

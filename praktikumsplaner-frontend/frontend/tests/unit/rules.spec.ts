@@ -1,7 +1,10 @@
+import { describe, expect, it } from "vitest";
+
 import { useRules } from "@/composables/rules";
-import { describe } from "vitest";
+
 const errorMessage = "Error";
 const validationRules = useRules();
+
 describe("rules fileFormat test", () => {
     it("tests fileFormatRules return true", () => {
         const txtRule = validationRules.fileTypeRule(

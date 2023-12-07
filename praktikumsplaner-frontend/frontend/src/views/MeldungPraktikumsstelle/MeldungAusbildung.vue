@@ -20,11 +20,10 @@
                         label="Ausbildungsrichtung*"
                         :items="Ausbildungsrichtung"
                         item-value="name"
-                        item-text="value"
+                        item-title="value"
                         :rules="requiredRule"
-                        :menu-props="customMenuProps"
-                        outlined
-                        @change="
+                        variant="outlined"
+                        @update:model-value="
                             () => {
                                 changeVorrZuweisungsZeitraum();
                                 zustelleradressverwaltung();
@@ -40,11 +39,10 @@
                         label="Ausbildungsjahr*"
                         :items="Ausbildungsjahr"
                         item-value="name"
-                        item-text="value"
+                        item-title="value"
                         :rules="requiredRule"
-                        :menu-props="customMenuProps"
-                        outlined
-                        @change="
+                        variant="outlined"
+                        @update:model-value="
                             () => {
                                 changeVorrZuweisungsZeitraum();
                                 zustelleradressverwaltung();
@@ -61,7 +59,7 @@
                         v-model="praktikumsstelle.dienststelle"
                         label="Konkrete Dienststelle*"
                         :rules="dienststelleRule"
-                        outlined
+                        variant="outlined"
                         @change="zustelleradressverwaltung()"
                     ></v-text-field>
                 </v-col>
@@ -70,12 +68,11 @@
                     <v-select
                         v-model="praktikumsstelle.referat"
                         :items="Referat"
-                        :menu-props="customMenuProps"
                         item-value="name"
-                        item-text="value"
+                        item-title="value"
                         label="Referat"
-                        outlined
-                        @change="zustelleradressverwaltung()"
+                        variant="outlined"
+                        @update:model-value="zustelleradressverwaltung()"
                     ></v-select>
                 </v-col>
                 <v-col cols="1" />
@@ -86,11 +83,10 @@
                         v-model="praktikumsstelle.programmierkenntnisse"
                         label="Programmierkenntnisse"
                         :items="YesNoBoolean"
-                        :menu-props="customMenuProps"
                         item-value="value"
-                        item-text="name"
-                        outlined
-                        @change="zustelleradressverwaltung()"
+                        item-title="name"
+                        variant="outlined"
+                        @update:model-value="zustelleradressverwaltung()"
                     >
                     </v-select>
                 </v-col>
@@ -100,12 +96,11 @@
                         v-model="praktikumsstelle.projektarbeit"
                         label="Projektarbeit*"
                         :items="YesNoBoolean"
-                        :menu-props="customMenuProps"
                         item-value="value"
-                        item-text="name"
+                        item-title="name"
                         :rules="booleanRule"
-                        outlined
-                        @change="zustelleradressverwaltung()"
+                        variant="outlined"
+                        @update:model-value="zustelleradressverwaltung()"
                     ></v-select>
                 </v-col>
                 <v-col cols="1" />
@@ -116,7 +111,7 @@
                         v-model="praktikumsstelle.oertlicheAusbilder"
                         label="Name örtliche Ausbilder*in*"
                         :rules="oertlAusbidlerRule"
-                        outlined
+                        variant="outlined"
                         @change="zustelleradressverwaltung()"
                     ></v-text-field>
                 </v-col>
@@ -126,7 +121,7 @@
                         v-model="praktikumsstelle.email"
                         label="E-mail örtliche Ausbilderin*"
                         :rules="emailRule"
-                        outlined
+                        variant="outlined"
                         @change="zustelleradressverwaltung()"
                     ></v-text-field>
                 </v-col>
@@ -138,7 +133,7 @@
                         v-model="praktikumsstelle.namentlicheAnforderung"
                         label="Namentliche Anforderung spez. gewünschter Nwk"
                         :rules="namentlicheAnforderungRule"
-                        outlined
+                        variant="outlined"
                         @change="zustelleradressverwaltung()"
                     ></v-text-field>
                 </v-col>
@@ -148,12 +143,11 @@
                         v-model="praktikumsstelle.dringlichkeit"
                         label="Dringlichkeit"
                         :items="Dringlichkeit"
-                        :menu-props="customMenuProps"
                         item-value="name"
-                        item-text="value"
+                        item-title="value"
                         :rules="requiredRule"
-                        outlined
-                        @change="zustelleradressverwaltung()"
+                        variant="outlined"
+                        @update:model-value="zustelleradressverwaltung()"
                     ></v-select>
                 </v-col>
                 <v-col cols="1" />
@@ -164,10 +158,9 @@
                         v-model="zeitraum"
                         label="Zeitraum Nwk"
                         hint="Wählen Sie Art und Jahrgang des Stuzubis aus"
-                        outlined
+                        variant="outlined"
                         disabled
-                        filled
-                        background-color="grey"
+                        bg-color="grey"
                     ></v-text-field>
                 </v-col>
                 <v-col cols="2" />
@@ -177,11 +170,10 @@
                         v-model="praktikumsstelle.planstelleVorhanden"
                         label="Planstelle"
                         :items="YesNoBoolean"
-                        :menu-props="customMenuProps"
                         item-value="value"
-                        item-text="name"
-                        outlined
-                        @change="zustelleradressverwaltung()"
+                        item-title="name"
+                        variant="outlined"
+                        @update:model-value="zustelleradressverwaltung()"
                     >
                     </v-select>
                 </v-col>
@@ -193,7 +185,7 @@
                         v-model="praktikumsstelle.taetigkeiten"
                         label="Aufgaben am Praktikumsplatz*"
                         :rules="taetigkeitenRule"
-                        outlined
+                        variant="outlined"
                         @change="zustelleradressverwaltung()"
                     ></v-textarea>
                 </v-col>
@@ -203,7 +195,7 @@
                 <v-col>
                     <v-btn
                         color="primary"
-                        outlined
+                        variant="outlined"
                         :to="{ path: '/meldungAusbilder' }"
                     >
                         ZURÜCK
@@ -224,19 +216,20 @@
 </template>
 
 <script setup lang="ts">
-import { Ausbildungsrichtung } from "@/types/Ausbildungsrichtung";
 import { onMounted, ref } from "vue";
-import Praktikumsstelle from "@/types/Praktikumsstelle";
+
+import MeldezeitraumService from "@/api/MeldezeitraumService";
+import MeldungService from "@/api/PraktikumsstellenService";
 import { useRules } from "@/composables/rules";
 import { useZeitraeume } from "@/composables/voraussichtlicherZuweisungsZeitraum";
-import { Ausbildungsjahr } from "@/types/Ausbildungsjahr";
-import { Referat } from "@/types/Referat";
-import { YesNoBoolean } from "@/types/YesNoBoolean";
-import { Dringlichkeit } from "@/types/Dringlichkeit";
-import MeldungService from "@/api/PraktikumsstellenService";
 import router from "@/router";
 import { useHeaderStore } from "@/stores/header";
-import MeldezeitraumService from "@/api/MeldezeitraumService";
+import { Ausbildungsjahr } from "@/types/Ausbildungsjahr";
+import { Ausbildungsrichtung } from "@/types/Ausbildungsrichtung";
+import { Dringlichkeit } from "@/types/Dringlichkeit";
+import Praktikumsstelle from "@/types/Praktikumsstelle";
+import { Referat } from "@/types/Referat";
+import { YesNoBoolean } from "@/types/YesNoBoolean";
 
 const activeMeldezeitraum = ref<boolean>(false);
 
@@ -286,9 +279,6 @@ const taetigkeitenRule = [
     ),
 ];
 
-const customMenuProps = {
-    offsetY: true,
-};
 const form = ref<HTMLFormElement>();
 const headerStore = useHeaderStore();
 

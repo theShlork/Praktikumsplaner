@@ -1,6 +1,7 @@
-import { API_BASE } from "@/Constants";
-import UserInfo from "@/types/UserInfo";
+import type UserInfo from "@/types/UserInfo";
+
 import FetchUtils from "@/api/FetchUtils";
+import { API_BASE } from "@/Constants";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 export class UserService {

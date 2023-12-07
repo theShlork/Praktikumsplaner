@@ -53,9 +53,9 @@
         <Error-dialog
             :dialogtext="errorDialogText"
             :dialogtitle="errorDialogTitle"
-            icontext="mdi mdi-alert-octagon-outline"
+            :model-value="errorDialog"
             iconcolor="red"
-            :value="errorDialog"
+            icontext="mdi mdi-alert-octagon-outline"
             @close="errorDialog = false"
         ></Error-dialog>
     </div>

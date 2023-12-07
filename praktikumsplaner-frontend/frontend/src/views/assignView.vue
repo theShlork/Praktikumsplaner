@@ -1,9 +1,9 @@
 <template>
     <v-container>
-        <PageTitle
+        <page-title
             back-button-url="/"
             page-header-text="Zuweisung"
-        ></PageTitle>
+        ></page-title>
         <v-row>
             <v-col cols="4">
                 <active-nwk-list-for-zuweisung />
@@ -16,6 +16,7 @@
     </v-container>
 </template>
 <script setup lang="ts">
-import PraktikumsstellenList from "@/components/PraktikumsstellenList.vue";
 import ActiveNwkListForZuweisung from "@/components/ActiveNwkListForZuweisung.vue";
+import PageTitle from "@/components/common/PageTitle.vue";
+import PraktikumsstellenList from "@/components/PraktikumsstellenList.vue";
 </script>

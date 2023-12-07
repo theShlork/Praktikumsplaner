@@ -3,7 +3,7 @@
         <v-card
             class="full-width-card"
             elevation="16"
-            outlined
+            variant="outlined"
             :ripple="false"
             @click="show = !show"
         >
@@ -18,7 +18,7 @@
                     <v-card-text
                         v-if="props.praktikumsstelle.planstelleVorhanden"
                     >
-                        <v-icon x-large>mdi-account-star</v-icon>
+                        <v-icon size="x-large">mdi-account-star</v-icon>
                     </v-card-text>
                 </v-col>
             </v-row>
@@ -31,7 +31,7 @@
                 <v-chip
                     v-if="props.praktikumsstelle.assignedNwk"
                     color="primary"
-                    close
+                    closable
                     close-icon="mdi-close"
                     @click:close="openConfirmationDialog(praktikumsstelle)"
                     >{{
@@ -73,10 +73,10 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import Praktikumsstelle from "@/types/Praktikumsstelle";
+
 import PraktikumsstellenService from "@/api/PraktikumsstellenService";
-import { EventBus } from "@/stores/event-bus";
 import YesNoDialogWithoutActivator from "@/components/common/YesNoDialogWithoutActivator.vue";
+import Praktikumsstelle from "@/types/Praktikumsstelle";
 
 const show = ref<boolean>(false);
 
@@ -121,7 +121,7 @@ function getCardText(stelle: Praktikumsstelle): string {
 
 function getCardDetailText(stelle: Praktikumsstelle): string {
     let cardText = "";
-    let dringlichkeit =
+    const dringlichkeit =
         stelle.dringlichkeit.charAt(0).toUpperCase() +
         stelle.dringlichkeit.slice(1).toLowerCase();
     cardText += "Dringlichkeit: " + dringlichkeit + "\n";
@@ -150,7 +150,7 @@ function getCardDetailText(stelle: Praktikumsstelle): string {
 function unassignNwk() {
     if (stelleToAssignUnassign.value?.id) {
         PraktikumsstellenService.unassignNwk(stelleToAssignUnassign.value.id);
-        EventBus.$emit(
+        this!.emitter.$emit(
             "unassignedNwk",
             stelleToAssignUnassign.value.assignedNwk
         );

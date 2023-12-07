@@ -9,7 +9,7 @@
         <v-btn
             v-if="color === 'error'"
             color="primary"
-            text
+            variant="text"
             @click="show = false"
         >
             Schließen
@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
+
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();

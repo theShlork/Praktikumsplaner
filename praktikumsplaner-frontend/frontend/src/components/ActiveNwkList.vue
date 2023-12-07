@@ -4,7 +4,7 @@
             v-for="nwk in nwks"
             :key="nwk.id"
         >
-            <v-card class="cards">
+            <v-card color="accent">
                 <v-card-title class="justify-center"
                     >{{ nwk.vorname }} {{ nwk.nachname }}</v-card-title
                 >
@@ -18,9 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import Nwk from "@/types/Nwk";
+import { onMounted, ref } from "vue";
+
 import NwkService from "@/api/NwkService";
+import Nwk from "@/types/Nwk";
+
 const nwks = ref<Nwk[]>([]);
 
 onMounted(() => {
@@ -32,8 +34,4 @@ function getAllActiveNwks() {
     });
 }
 </script>
-<style scoped lang="scss">
-.cards {
-    background-color: var(--v-accent-base);
-}
-</style>
+<style></style>

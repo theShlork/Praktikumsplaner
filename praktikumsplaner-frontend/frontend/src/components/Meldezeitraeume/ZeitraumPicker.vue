@@ -6,8 +6,8 @@
                     <v-text-field
                         ref="endDate"
                         v-model="range.startZeitpunkt"
-                        dense
-                        outlined
+                        density="compact"
+                        variant="outlined"
                         type="date"
                         :rules="startZeitpunktRules"
                         :append-icon="calendarIcon"
@@ -21,8 +21,8 @@
                     <v-text-field
                         ref="startDate"
                         v-model="range.endZeitpunkt"
-                        dense
-                        outlined
+                        density="compact"
+                        variant="outlined"
                         type="date"
                         :append-icon="calendarIcon"
                         label="Ende des Meldezeitraums"
@@ -37,6 +37,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+
 import { useRules } from "@/composables/rules";
 import Meldezeitraum from "@/types/Meldezeitraum";
 

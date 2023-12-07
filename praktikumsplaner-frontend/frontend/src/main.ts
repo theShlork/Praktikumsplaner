@@ -1,20 +1,13 @@
-import Vue, { VNode } from "vue";
-import Vuetify from "./plugins/vuetify";
+import mitt from "mitt";
+import { createApp } from "vue";
+
+import { registerPlugins } from "@/plugins";
 import App from "./App.vue";
-import router from "./router";
-import moment from "moment";
-import { createPinia, PiniaVuePlugin } from "pinia";
 
-Vue.config.productionTip = false;
-Vue.use(PiniaVuePlugin);
+const emitter = mitt();
+const app = createApp(App);
 
-const pinia = createPinia();
+registerPlugins(app);
 
-moment.locale(window.navigator.language);
-
-new Vue({
-    router,
-    pinia,
-    vuetify: Vuetify,
-    render: (h): VNode => h(App),
-}).$mount("#app");
+app.config.globalProperties.emitter = emitter;
+app.mount("#app");

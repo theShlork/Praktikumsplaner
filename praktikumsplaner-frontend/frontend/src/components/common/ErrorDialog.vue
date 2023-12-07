@@ -1,8 +1,7 @@
 <template>
     <v-dialog
-        :key="props.value"
         v-model="visible"
-        persistent
+        :persistent="true"
         width="550"
     >
         <v-card>
@@ -13,7 +12,7 @@
                 <v-row>
                     <v-col cols="1">
                         <v-icon
-                            x-large
+                            size="x-large"
                             :color="iconcolor"
                             >{{ props.icontext }}</v-icon
                         >
@@ -26,7 +25,7 @@
             <v-card-actions>
                 <v-spacer />
                 <v-btn
-                    text
+                    variant="text"
                     @click="close"
                 >
                     Schliessen
@@ -47,16 +46,16 @@ const props = defineProps<{
     /**
      * Control-flag
      */
-    value: boolean;
+    modelValue: boolean;
 }>();
 const emits = defineEmits<{
     (e: "close"): void;
-    (e: "input", v: boolean): void;
+    (e: "update:modelValue", v: boolean): void;
 }>();
 
 const visible = computed({
-    get: () => props.value,
-    set: (v) => emits("input", v),
+    get: () => props.modelValue,
+    set: (v) => emits("update:modelValue", v),
 });
 
 function close(): void {
@@ -64,6 +63,4 @@ function close(): void {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

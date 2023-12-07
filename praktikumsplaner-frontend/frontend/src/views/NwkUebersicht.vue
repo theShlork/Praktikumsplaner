@@ -6,5 +6,4 @@
 import ActiveNwkList from "@/components/ActiveNwkList.vue";
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -17,12 +17,12 @@
                     :key="abteilung"
                     class="custom-panel"
                 >
-                    <v-expansion-panel-header>{{
+                    <v-expansion-panel-title>{{
                         abteilung
-                    }}</v-expansion-panel-header>
-                    <v-expansion-panel-content>
+                    }}</v-expansion-panel-title>
+                    <v-expansion-panel-text>
                         <v-list>
-                            <v-list-item-group>
+                            <v-list-group>
                                 <v-list-item
                                     v-for="praktikumsstelle in asPraktikumsstelleList(
                                         praktikumsstellenliste
@@ -38,13 +38,13 @@
                                     @dragover.prevent
                                     @dragenter.prevent
                                 >
-                                    <PraktikumsstelleCard
+                                    <praktikumsstelle-card
                                         :praktikumsstelle="praktikumsstelle"
-                                    ></PraktikumsstelleCard>
+                                    ></praktikumsstelle-card>
                                 </v-list-item>
-                            </v-list-item-group>
+                            </v-list-group>
                         </v-list>
-                    </v-expansion-panel-content>
+                    </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>
         </v-container>
@@ -52,13 +52,13 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
-import Praktikumsstelle from "@/types/Praktikumsstelle";
+
 import PraktikumsstellenService from "@/api/PraktikumsstellenService";
-import { useNwkStore } from "@/stores/nwkStore";
-import Nwk from "@/types/Nwk";
-import { EventBus } from "@/stores/event-bus";
 import YesNoDialogWithoutActivator from "@/components/common/YesNoDialogWithoutActivator.vue";
 import PraktikumsstelleCard from "@/components/PraktikumsstelleCard.vue";
+import { useNwkStore } from "@/stores/nwkStore";
+import Nwk from "@/types/Nwk";
+import Praktikumsstelle from "@/types/Praktikumsstelle";
 
 const praktikumsstellen = ref<Map<string, Praktikumsstelle[]>>();
 const nwkStore = useNwkStore();
@@ -209,7 +209,10 @@ function assignNwk() {
         stelleToAssignUnassign.value.id,
         stelleToAssignUnassign.value.assignedNwk.id
     );
-    EventBus.$emit("assignedNwk", stelleToAssignUnassign.value.assignedNwk);
+    this!.emitter.$emit(
+        "assignedNwk",
+        stelleToAssignUnassign.value.assignedNwk
+    );
     resetWarningDialog();
 }
 function resetWarningDialog() {

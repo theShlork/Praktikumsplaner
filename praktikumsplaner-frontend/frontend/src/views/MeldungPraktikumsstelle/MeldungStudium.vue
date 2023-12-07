@@ -177,7 +177,6 @@
                         v-model="praktikumsstelle.planstelleVorhanden"
                         label="Planstelle"
                         :items="YesNoBoolean"
-                        :menu-props="customMenuProps"
                         item-value="value"
                         item-text="name"
                         outlined
@@ -286,9 +285,6 @@ const taetigkeitenRule = [
     ),
 ];
 
-const customMenuProps = {
-    offsetY: true,
-};
 const form = ref<HTMLFormElement>();
 const headerStore = useHeaderStore();
 
