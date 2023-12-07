@@ -22,7 +22,7 @@
                     }}</v-expansion-panel-title>
                     <v-expansion-panel-text>
                         <v-list>
-                            <v-list-group>
+                            <v-list>
                                 <v-list-item
                                     v-for="praktikumsstelle in asPraktikumsstelleList(
                                         praktikumsstellenliste
@@ -33,7 +33,6 @@
                                             praktikumsstelle.assignedNwk,
                                         spacer: true,
                                     }"
-                                    :ripple="false"
                                     @drop="drop(praktikumsstelle)"
                                     @dragover.prevent
                                     @dragenter.prevent
@@ -42,7 +41,7 @@
                                         :praktikumsstelle="praktikumsstelle"
                                     ></praktikumsstelle-card>
                                 </v-list-item>
-                            </v-list-group>
+                            </v-list>
                         </v-list>
                     </v-expansion-panel-text>
                 </v-expansion-panel>

@@ -1,11 +1,11 @@
 export function useRules() {
-    function fileTypeRule(format: string, message = "error") {
-        return (value: File | null | undefined) =>
-            !value || (value && value.type == format) || message;
+    function filesFirstTypeRule(format: string, message = "error") {
+        return (value: File[] | null | undefined) =>
+            !value || (value && value[0].type == format) || message;
     }
 
-    function fileRequiredRule(message = "error") {
-        return (value: File | null | undefined) =>
+    function filesRequiredRule(message = "error") {
+        return (value: File[] | null | undefined) =>
             value != null || value != undefined || message;
     }
 
@@ -41,12 +41,12 @@ export function useRules() {
     }
 
     return {
-        fileTypeRule,
+        filesFirstTypeRule,
         maxLengthRule,
         notEmptyDateRule,
         notEmptyRule,
         emailRule,
         notEmptyBooleanRule,
-        fileRequiredRule,
+        filesRequiredRule,
     };
 }

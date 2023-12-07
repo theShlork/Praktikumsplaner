@@ -5,7 +5,7 @@
             :key="nwk.id"
         >
             <v-card color="accent">
-                <v-card-title class="justify-center"
+                <v-card-title class="text-center"
                     >{{ nwk.vorname }} {{ nwk.nachname }}</v-card-title
                 >
                 <v-card-subtitle class="text-center"

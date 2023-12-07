@@ -22,7 +22,7 @@
                     <v-list>
                         <v-list-item>
                             <v-file-input
-                                v-model="excelDatei"
+                                :model-value="excelDateien"
                                 :accept="excelFormat"
                                 :rules="rules"
                                 label="Datei auswählen"
@@ -41,6 +41,7 @@
                             Abbrechen
                         </v-btn>
                         <v-btn
+                            variant="flat"
                             color="primary"
                             @click="uploadFile()"
                         >
@@ -72,17 +73,17 @@ import { useRules } from "@/composables/rules";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const visible = ref<boolean>();
-const excelDatei = ref<File>();
+const excelDateien = ref<File[]>();
 const form = ref<HTMLFormElement>();
 const snackbarStore = useSnackbarStore();
 const excelFormat =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 const validationRules = useRules();
 const rules = [
-    validationRules.fileRequiredRule(
+    validationRules.filesRequiredRule(
         "Eine Excel-Datei hochladen oder abbrechen."
     ),
-    validationRules.fileTypeRule(
+    validationRules.filesFirstTypeRule(
         excelFormat,
         "Falsches Dateiformat. Es muss eine Excel-Datei hochgeladen werden."
     ),
@@ -98,8 +99,8 @@ function cancel() {
     form.value?.reset();
 }
 function uploadFile() {
-    if (!excelDatei.value || !form.value?.validate()) return;
-    NwkService.uploadExcelFile(excelDatei.value)
+    if (!excelDateien.value || !form.value?.validate()) return;
+    NwkService.uploadExcelFile(excelDateien.value[0])
         .then(() =>
             snackbarStore.showMessage({
                 message: "Nachwuchskräfte erfolgreich angelegt.",

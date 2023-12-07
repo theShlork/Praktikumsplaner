@@ -9,9 +9,7 @@
                 >
                     <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
                     <router-link to="/">
-                        <v-toolbar-title class="text--white">
-                            {{ header }}</v-toolbar-title
-                        >
+                        <v-toolbar-title> {{ header }}</v-toolbar-title>
                     </router-link>
                 </v-col>
                 <v-col
@@ -97,4 +95,9 @@ watch(
 );
 </script>
 
-<style></style>
+<style>
+a {
+    color: white;
+    text-decoration: none;
+}
+</style>
