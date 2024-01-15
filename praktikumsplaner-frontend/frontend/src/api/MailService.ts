@@ -32,10 +32,7 @@ export default {
                 }
             })
             .catch((err) => {
-                useSnackbarStore().showMessage({
-                    message: err.message,
-                    level: Levels.ERROR,
-                });
+                FetchUtils.defaultResponseHandler(err);
                 return Promise.reject(err); // Fehler zurückgeben
             });
     },

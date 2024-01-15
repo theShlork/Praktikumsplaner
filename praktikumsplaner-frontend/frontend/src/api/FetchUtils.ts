@@ -94,7 +94,7 @@ export default class FetchUtils {
      */
     static defaultResponseHandler(
         response: Response,
-        errorMessage = "Es ist ein unbekannter Fehler aufgetreten."
+        errorMessage = "Es ist keine Verbindung zum Server möglich. Bitte melden Sie sich bei der Administration."
     ): void {
         if (!response.ok) {
             if (response.status === 403) {
@@ -106,7 +106,7 @@ export default class FetchUtils {
                 location.reload();
             }
             throw new ApiError({
-                level: Levels.WARNING,
+                level: Levels.ERROR,
                 message: errorMessage,
             });
         }
