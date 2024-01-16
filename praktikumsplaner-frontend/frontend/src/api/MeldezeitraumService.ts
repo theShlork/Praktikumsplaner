@@ -19,6 +19,10 @@ export default {
                 return response.json();
             })
             .catch((err) => {
+                useSnackbarStore().showMessage({
+                    message: err,
+                    level: Levels.ERROR,
+                });
                 FetchUtils.defaultResponseHandler(err);
             });
     },
