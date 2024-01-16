@@ -1,4 +1,5 @@
 import { ApiError, Levels } from "@/api/error";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 export default class FetchUtils {
     /**
@@ -94,7 +95,7 @@ export default class FetchUtils {
      */
     static defaultResponseHandler(
         response: Response,
-        errorMessage = "Es ist keine Verbindung zum Server möglich. Bitte melden Sie sich bei der Administration."
+        errorMessage = "Es ist ein unbekannter Fehler aufgetreten."
     ): void {
         if (!response.ok) {
             if (response.status === 403) {
@@ -104,9 +105,15 @@ export default class FetchUtils {
                 });
             } else if (response.type === "opaqueredirect") {
                 location.reload();
+            } else if (response.status >= 500 && response.status <= 599) {
+                useSnackbarStore().showMessage({
+                    message:
+                        "Es ist ein interner Serverfehler aufgetreten. Bitte melden Sie sich bei der Administration.",
+                    level: Levels.ERROR,
+                });
             }
             throw new ApiError({
-                level: Levels.ERROR,
+                level: Levels.WARNING,
                 message: errorMessage,
             });
         }
