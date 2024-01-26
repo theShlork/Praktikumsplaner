@@ -1,34 +1,52 @@
 <template>
-    <v-container>
-        <PageTitle
-            back-button-url="/"
-            page-header-text="Zuweisung"
-        ></PageTitle>
+    <v-container style="max-height: 100vh">
         <v-row>
-            <v-col cols="5">
-                <active-nwk-list-for-zuweisung v-model="nwks" />
+            <PageTitle
+                back-button-url="/"
+                page-header-text="Zuweisung"
+            ></PageTitle>
+            <v-row style="padding-top: 10px">
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="primary"
+                    class="mr-4"
+                    @click="openMailWarningDialog"
+                    >Mails senden</v-btn
+                >
+                <ExcelExport
+                    class="mr-10"
+                    :start-download="startDownload"
+                    @click="openExcelWarnings"
+                    @exported="exported"
+                ></ExcelExport>
+            </v-row>
+        </v-row>
+        <v-row>
+            <v-col
+                cols="5"
+                class="overflow-y-auto"
+                style="max-height: 70vh"
+            >
+                <active-nwk-list-for-zuweisung
+                    v-model="nwks"
+                    class="overflow-y-auto"
+                />
             </v-col>
-            <v-divider vertical />
-            <v-col cols="7">
+            <v-divider
+                vertical
+                class="ml-5"
+            />
+            <v-col
+                cols="cols"
+                class="overflow-y-auto"
+                style="max-height: 70vh"
+            >
                 <praktikumsstellen-list
                     :assignment="true"
                     :praktikumsstellen-map="praktikumsstellenMap"
+                    class="overflow-y-auto"
                 />
             </v-col>
-        </v-row>
-        <v-row>
-            <v-spacer></v-spacer>
-            <v-btn
-                color="primary"
-                class="mr-4"
-                @click="openMailWarningDialog"
-                >Mails senden</v-btn
-            >
-            <ExcelExport
-                :start-download="startDownload"
-                @click="openExcelWarnings"
-                @exported="exported"
-            ></ExcelExport>
         </v-row>
         <WarningDialog
             :visible="showWarningDialog"
